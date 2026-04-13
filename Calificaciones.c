@@ -33,6 +33,31 @@ int main() {
         }
         promedioEstudiante[i] = suma / ASIGNATURAS;
     }
+   // Calcular promedios por asignatura
+    for (int j = 0; j < ASIGNATURAS; j++) {
+        float suma = 0;
+        maxAsignatura[j] = calificaciones[0][j];
+        minAsignatura[j] = calificaciones[0][j];
+        estudianteMaxAsignatura[j] = 1;
+        estudianteMinAsignatura[j] = 1;
+        aprobados[j] = 0;
+        reprobados[j] = 0;
+
+        for (int i = 0; i < ESTUDIANTES; i++) {
+            suma += calificaciones[i][j];
+            if (calificaciones[i][j] > maxAsignatura[j]) {
+                maxAsignatura[j] = calificaciones[i][j];
+                estudianteMaxAsignatura[j] = i+1;
+            }
+            if (calificaciones[i][j] < minAsignatura[j]) {
+                minAsignatura[j] = calificaciones[i][j];
+                estudianteMinAsignatura[j] = i+1;
+            }
+            if (calificaciones[i][j] >= 6) aprobados[j]++;
+            else reprobados[j]++;
+        }
+        promedioAsignatura[j] = suma / ESTUDIANTES;
+    }
 
     // Mostrar resultados
     printf("\n--- Resultados ---\n");
@@ -41,7 +66,12 @@ int main() {
                i+1, promedioEstudiante[i], maxEstudiante[i], minEstudiante[i]);
     }
 
-   
+    for (int j = 0; j < ASIGNATURAS; j++) {
+        printf("Asignatura %d -> Promedio: %.2f | Max: (%.2f, Estudiante %d) | Min: (%.2f, Estudiante %d) | Aprobados: %d | Reprobados: %d\n",
+               j+1, promedioAsignatura[j], maxAsignatura[j], estudianteMaxAsignatura[j],
+               minAsignatura[j], estudianteMinAsignatura[j], aprobados[j], reprobados[j]);
+    }
+
     return 0;
 }
 
