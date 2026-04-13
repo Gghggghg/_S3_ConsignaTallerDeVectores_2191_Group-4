@@ -21,19 +21,21 @@ int main() {
         }
     }
 
-    // Calcular promedios por estudiante
+    // Calcular promedios por estudiante 
     for (int i = 0; i < ESTUDIANTES; i++) {
         float suma = 0;
         maxEstudiante[i] = calificaciones[i][0];
         minEstudiante[i] = calificaciones[i][0];
         for (int j = 0; j < ASIGNATURAS; j++) {
             suma += calificaciones[i][j];
+            //y encontrar maximos y minimos por estudiante
             if (calificaciones[i][j] > maxEstudiante[i]) maxEstudiante[i] = calificaciones[i][j];
             if (calificaciones[i][j] < minEstudiante[i]) minEstudiante[i] = calificaciones[i][j];
         }
         promedioEstudiante[i] = suma / ASIGNATURAS;
     }
-   // Calcular promedios por asignatura
+   // Calcular promedios por asignatura   
+    for (int j = 0; j < ASIGNATURAS; j++) {
     for (int j = 0; j < ASIGNATURAS; j++) {
         float suma = 0;
         maxAsignatura[j] = calificaciones[0][j];
@@ -42,7 +44,7 @@ int main() {
         estudianteMinAsignatura[j] = 1;
         aprobados[j] = 0;
         reprobados[j] = 0;
-
+//y encontrar maximos y minimos por asignatura,
         for (int i = 0; i < ESTUDIANTES; i++) {
             suma += calificaciones[i][j];
             if (calificaciones[i][j] > maxAsignatura[j]) {
@@ -53,6 +55,7 @@ int main() {
                 minAsignatura[j] = calificaciones[i][j];
                 estudianteMinAsignatura[j] = i+1;
             }
+            //ademas de contar aprobados y reprobados  
             if (calificaciones[i][j] >= 6) aprobados[j]++;
             else reprobados[j]++;
         }
